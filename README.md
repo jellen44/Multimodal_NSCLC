@@ -4,6 +4,10 @@ This study presents a novel, autoencoder-based pipeline for both adenocarcinoma 
 
 Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02) for LUAD and LUSC, respectively. Notably, utilizing only lncRNA and clinical data led to effective survival discrimination, with C-indexes of 0.69 (±.03) for LUAD (the highest performance of any LUAD combination) and 0.62 (±.03) for LUSC. Overall, higher performance was achieved by using a single denoising autoencoder for all biological data (early integration) and by training on both LUSC and LUAD together. Two significant survival subtype clusters (log rank test p-value = 1e-9) were identified, allowing us to locate 991 differentially expressed transcripts in the poorer survival group across all four biological modalities.
 
+# Instructions
+
+- 
+
 # Pipeline Script Descriptions
 
 ### 1. DownloadingData.Rmd
@@ -22,7 +26,7 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 
 ### 7. PostProcessing.Rmd
 
-# Differential Expression Analysis Scripts
+# Survival Subtype Script Descriptions
 
 ### 1. KMeans_Clustering.R
 
@@ -34,7 +38,7 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 
 ### 5. DEA_LNCRNAS.Rmd
 
-# Important Files
+# Important File Descriptions
 
 ### 1. LUAD_indices_sample_5fold.Rdata
 
