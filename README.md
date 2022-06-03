@@ -10,7 +10,7 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 2. If you have not downloaded R, go to https://www.r-project.org/ and click the “Download R” link under the “Getting Started” header. Next, go to https://rstudio.com/products/rstudio/download/, choose the “RStudio Desktop” Option and click “Download.”
 3. Open and run the 'DownloadingData.Rmd' script above in R or R Studio, which will download mRNA, miRNA and DNA Methylation data directly from TCGA and save it into the Multimodal folder.
 4. Run the 'PreProcessing.R' script to process all of the data for all five modalities, including extracting lncRNA data from the mRNA file, removing biological transcripts with too many missing values/zeros (see paper) and taking only the 732 eligible patients. Again, the processed files will be saved in the Multimodal folder.
-5. Run the files below (see descriptions) to get results and then run the 'PostProcessing.Rmd' script to analyze those results.
+5. Run the files below (see descriptions) to get results and then run the 'PostProcessing.Rmd' script to analyze those results and create summary figures.
 
 # Pipeline Script Descriptions
 
