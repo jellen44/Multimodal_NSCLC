@@ -40,18 +40,17 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 
 - This script takes the multimodal feature space from a chosen pipeline run, uses the Silhouette Method to find the optimal number of clusters and then performs K-means clustering with the determined cluster number. A Kaplan-Meier curve comparing the survival subtypes is generated and the barcodes of each group are saved in order to perform differential expression analyses below. Thus, it is important to note that you must run the 'AllModality_Comparison.R' script above in order to get the multimodal feature space used for K Means Clustering. You also must run this script before running any of the DEA scripts below for each modality.
 
-**2. DEA_mRNA.Rmd**
+**2. DEA Scripts: 
 
-**3. DEA_miRNA.Rmd**
-
-**4. DEA_Methylation.Rmd**
-
-**5. DEA_LNCRNAS.Rmd**
+- DEA_mRNA.Rmd; DEA_miRNA.Rmd; DEA_Methylation.Rmd; DEA_LNCRNAS.Rmd
+- Each of these scripts performs differential expression analysis using the groups generated from the K-means clustering above. For the miRNA, mRNA and lncRNA scripts, count data is downloaded, differential expression analysis is carried out and volcano plots are generated showing transcripts that are differentially expressed. In the multimodal folder, .csv files are saved with the list of 
 
 # Important File Descriptions
 
-**1. LUAD_indices_sample_5fold.Rdata**
+**1. LUAD_indices_sample_5fold.Rdata and LUSC_indices_sample_5fold.Rdata**
 
-**2. LUSC_indices_sample_5fold.Rdata**
+- Using the set.seed function in R, these are the five randomly generated cross validation fold groups used in this study for both LUAD and LUSC. The script will run without them, but this is just to make sure that differences in R versions don't lead to differences in these fold groups.
 
-**3. barcode_disease_mapping.Rdata**
+**2. barcode_disease_mapping.Rdata**
+
+- List of all 732 barcodes of patients utilized in this study.
