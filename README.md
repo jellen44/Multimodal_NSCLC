@@ -38,7 +38,7 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 
 **1. KMeans_Clustering.R**
 
-- It is important to note that you must run the 'AllModality_Comparison.R' script above in order to get the multimodal feature space used for K Means Clustering. You also must run this script before running any of the DEA scripts below for each modality.
+- This script takes the multimodal feature space from a chosen pipeline run, uses the Silhouette Method to find the optimal number of clusters and then performs K-means clustering with the determined cluster number. A Kaplan-Meier curve comparing the survival subtypes is generated and the barcodes of each group are saved in order to perform differential expression analyses below. Thus, it is important to note that you must run the 'AllModality_Comparison.R' script above in order to get the multimodal feature space used for K Means Clustering. You also must run this script before running any of the DEA scripts below for each modality.
 
 **2. DEA_mRNA.Rmd**
 
