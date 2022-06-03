@@ -6,7 +6,7 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 
 ![Multimodal_Final](https://user-images.githubusercontent.com/34974716/171767371-0e2c3dea-2fdf-4af3-bd1c-8049456c80bf.png)
 
-# Instruction Steps
+# Instructions
 
 1. Download the zipped 'Multimodal' folder here: [Multimodal.zip](https://github.com/jellen44/Multimodal_NSCLC/files/8828858/Multimodal.zip)
 2. Unzip the Multimodal folder and add it to your desktop.
