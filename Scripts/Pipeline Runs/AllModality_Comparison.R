@@ -12,7 +12,7 @@ activation_function_set <- c("sigmoid" #,"tanh","relu"
 #Percentage of matrix to replace with zeros (fights overfitting by the autoencoder)
 zeros_percentage_set <- c(0.3 #, 0.2, 0.4
                           )
-#gaussian_set <- c(0.1, 0.5, 1)
+gaussian_set <- c(0.1, 0.5, 1)
 
 
 # Looping Through The Chosen Activation Functions and Chosen Hyperparameters (If you want to test multiple combinations)
