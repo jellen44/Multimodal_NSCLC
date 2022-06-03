@@ -42,9 +42,8 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 
 - This script takes the multimodal feature space from a chosen pipeline run, uses the Silhouette Method to find the optimal number of clusters and then performs K-means clustering with the determined cluster number. A Kaplan-Meier curve comparing the survival subtypes is generated and the barcodes of each group are saved in order to perform differential expression analyses below. Thus, it is important to note that you must run the 'AllModality_Comparison.R' script above in order to get the multimodal feature space used for K Means Clustering. You also must run this script before running any of the DEA scripts below for each modality.
 
-**2. DEA Scripts: 
+**2. DEA Scripts: DEA_mRNA.Rmd, DEA_miRNA.Rmd, DEA_Methylation.Rmd and DEA_LNCRNAS.Rmd**
 
-- DEA_mRNA.Rmd; DEA_miRNA.Rmd; DEA_Methylation.Rmd; DEA_LNCRNAS.Rmd
 - Each of these scripts performs differential expression analysis using the groups generated from the K-means clustering above. For the miRNA, mRNA and lncRNA scripts, count data is downloaded, differential expression analysis is carried out and volcano plots are generated showing transcripts that are differentially expressed. In the multimodal folder, .csv files are saved with the list of 
 
 # Important File Descriptions
