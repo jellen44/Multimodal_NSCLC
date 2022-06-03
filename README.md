@@ -4,31 +4,31 @@ This study presents a novel, autoencoder-based pipeline for both adenocarcinoma 
 
 Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02) for LUAD and LUSC, respectively. Notably, utilizing only lncRNA and clinical data led to effective survival discrimination, with C-indexes of 0.69 (±.03) for LUAD (the highest performance of any LUAD combination) and 0.62 (±.03) for LUSC. Overall, higher performance was achieved by using a single denoising autoencoder for all biological data (early integration) and by training on both LUSC and LUAD together. Two significant survival subtype clusters (log rank test p-value = 1e-9) were identified, allowing us to locate 991 differentially expressed transcripts in the poorer survival group across all four biological modalities.
 
-# Instructions
+# Instruction Steps
 
-- 
+1. Download the 'Multimodal' folder above and add it to your desktop 
+2. If you have not downloaded R, go to https://www.r-project.org/ and click the “Download R” link under the “Getting Started” header. Next, go to https://rstudio.com/products/rstudio/download/, choose the “RStudio Desktop” Option and click “Download.”
+3. Open and run the 'DownloadingData.Rmd' script above in R or R Studio, which will download mRNA, miRNA and DNA Methylation data directly from TCGA and save it into the Multimodal folder.
+4. Run the 'PreProcessing.R' script to process all of the data for all five modalities, including extracting lncRNA data from the mRNA file, removing biological transcripts with too many missing values/zeros (see paper) and taking only the 732 eligible patients. Again, the processed files will be saved in the Multimodal folder.
+5. Run the files below (see descriptions) to get results and then run the 'PostProcessing.Rmd' script to analyze those results.
 
 # Pipeline Script Descriptions
 
-### 1. DownloadingData.Rmd
+### 1. AllModality_Comparison.R
 
-- Hello
+### 2. LFS.R
 
-### 2. PreProcessing.R
+### 3. PCA.R
 
-### 3. AllModality_Comparison.R
+### 4. OnlyAutoencoder.R
 
-### 4. LFS.R
-
-### 5. PCA.R
-
-### 6. OnlyAutoencoder.R
-
-### 7. PostProcessing.Rmd
+### 5. PostProcessing.Rmd
 
 # Survival Subtype Script Descriptions
 
 ### 1. KMeans_Clustering.R
+
+- It is important to note that you must run the 'AllModality_Comparison.R' script above in order to get the multimodal feature space used for K Means Clustering. You also must run this script before running any of the DEA scripts below for each modality.
 
 ### 2. DEA_mRNA.Rmd
 
