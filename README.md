@@ -8,7 +8,8 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 
 # Instruction Steps
 
-1. Download the 'Multimodal' folder above and add it to your desktop 
+1. Download the zipped 'Multimodal' folder here: [Multimodal.zip](https://github.com/jellen44/Multimodal_NSCLC/files/8828858/Multimodal.zip)
+2. Unzip the Multimodal folder and add it to your desktop.
 2. If you have not downloaded R, go to https://www.r-project.org/ and click the “Download R” link under the “Getting Started” header. Next, go to https://rstudio.com/products/rstudio/download/, choose the “RStudio Desktop” Option and click “Download.”
 3. Open and run the 'DownloadingData.Rmd' script above in R or R Studio, which will download mRNA, miRNA and DNA Methylation data directly from TCGA and save it into the Multimodal folder. 
 4. Run the 'PreProcessing.R' script to process all of the data for all five modalities, including extracting lncRNA data from the mRNA file, removing biological transcripts with too many missing values/zeros (see paper) and taking only the 732 eligible patients. Again, the processed files will be saved in the Multimodal folder.
@@ -50,6 +51,7 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 
 **1. LUAD_indices_sample_5fold.Rdata and LUSC_indices_sample_5fold.Rdata**
 
+- NOTE: These files are contained Within the Multimodal folder downloaded above.
 - Using the set.seed function in R, these are the five randomly generated cross validation fold groups used in this study for both LUAD and LUSC. The script will run without them, but this is just to make sure that differences in R versions don't lead to differences in these fold groups.
 
 **2. barcode_disease_mapping.Rdata**
