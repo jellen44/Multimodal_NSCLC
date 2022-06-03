@@ -14,44 +14,44 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 
 # Pipeline Script Descriptions
 
-1. AllModality_Comparison.R
+**1. AllModality_Comparison.R**
 
 - This is the main script that implements the entire pipeline described in the paper. Starting with the preprocessed files, the data is split into five folds for 5-fold cross validation. The entire pipeline is run for each fold and all of the results are saved in the Multimodal folder. For each train/test split, the training data for each modality is scaled, run through linear feature selection (chosen features are used for the testing data), run through a denoising autoencoder and then used to predict survival using the Elastic Net model. The denoising autoencoder type and hyperparameters can be adjusted at the top of the script. Predictions are made for each single modality and for every modality together. Later, the script will also test all combinations of modalities using both late integration and early integration (see paper for description). Since this script tests all combinations, it will likely take a few hours to run on a CPU. Lastly, this script gives the option to only train on LUSC data or only train on LUAD data to see how the results might change.
 
-### 2. LFS.R
+**2. LFS.R**
 
 - The 'LFS.R' script works similarly to the 'AllModality_Comparison.R' script, but only implements linear feature selection (with no autoencoder) in order to compare our combined feature selection and denoising autoencoder approach to a pure feature selection approach.
 
-### 3. PCA.R
+**3. PCA.R**
 
 - This script uses PCA as its dimensionality reduction technique instead of linear feature selection and/or denoising autoencoders.
 
-### 4. OnlyAutoencoder.R
+**4. OnlyAutoencoder.R**
 
 - This script uses only autoencoders to compare our combined feature selection and denoising autoencoder approach to a pure denoising autoencoder approach to see if linear feature selection is even necessary.
 
-### 5. PostProcessing.Rmd
+**5. PostProcessing.Rmd**
 
 - This post-processing script takes all of the results from above and analyzes the data and produces figures. Figures will be created comparing multimodal and 2-omics approaches to single modalities by survival performance, comparing data dimensionality reduction techniques performance, examining the differences between late and early integration of multimodal data and visualizing how training on one or both data types (LUAD and LUSC) can affect performance. There is the option to save these figures directly into the Multimodal folder if desired. This script will only work fully if all of the above scripts are run, but most figures can still be made with just the 'AllModalities_Comparison.R' output.
 
 # Survival Subtype Script Descriptions
 
-### 1. KMeans_Clustering.R
+**1. KMeans_Clustering.R**
 
 - It is important to note that you must run the 'AllModality_Comparison.R' script above in order to get the multimodal feature space used for K Means Clustering. You also must run this script before running any of the DEA scripts below for each modality.
 
-### 2. DEA_mRNA.Rmd
+**2. DEA_mRNA.Rmd**
 
-### 3. DEA_miRNA.Rmd
+**3. DEA_miRNA.Rmd**
 
-### 4. DEA_Methylation.Rmd
+**4. DEA_Methylation.Rmd**
 
-### 5. DEA_LNCRNAS.Rmd
+**5. DEA_LNCRNAS.Rmd**
 
 # Important File Descriptions
 
-### 1. LUAD_indices_sample_5fold.Rdata
+**1. LUAD_indices_sample_5fold.Rdata**
 
-### 2. LUSC_indices_sample_5fold.Rdata
+**2. LUSC_indices_sample_5fold.Rdata**
 
-### 3. barcode_disease_mapping.Rdata
+**3. barcode_disease_mapping.Rdata**
