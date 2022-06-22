@@ -15,6 +15,8 @@ Using all data modalities, we achieved C-indexes of 0.67 (±.04) and 0.63 (±.02
 4. Run the 'PreProcessing.R' script to process all of the data for all five modalities, including extracting lncRNA data from the mRNA file, removing biological transcripts with too many missing values/zeros (see paper) and taking only the 732 eligible patients. Again, the processed files will be saved in the Multimodal folder.
 5. Run the files below (see descriptions) to get results and then run the 'PostProcessing.Rmd' script to analyze those results and create summary figures.
 
+NOTE: Updates to the TCGA database and how the NSCLC data are stored over time can create errors in the data downloading script so feel free to reach out to jgellen4@gmail.com with any questions about TCGA updates.
+
 # Pipeline Script Descriptions
 
 **1. AllModality_Comparison.R**
