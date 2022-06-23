@@ -41,6 +41,8 @@ library(readr)
 ### Downloading the Data - RNA Seq Data
 
 ```{r}
+# Note: TCGA database goes through constant updates that can change the way the data is downloaded, so reach out to jgellen4@gmail.com if there any issues below and the code needs to be updated.
+
 #LUAD Download
 query_LUAD <- GDCquery(project = "TCGA-LUAD", 
                   data.category = "Transcriptome Profiling", 
