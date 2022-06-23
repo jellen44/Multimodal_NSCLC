@@ -23,7 +23,7 @@ for (u in 1:length(activation_function_set)) {
     ## Loading Packages (Installing if Necessary)
     if (!require(tidyverse)) install.packages('tidyverse')
     if (!require(glmnet)) install.packages('glmnet')
-    if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+    if (!require(BiocManager, quietly = TRUE)) install.packages("BiocManager")
     if (!require(SummarizedExperiment)) BiocManager::install("MultiAssayExperiment")
     if (!require(TCGAbiolinks)) BiocManager::install('TCGAbiolinks')
     if (!require(AnnotationDbi)) BiocManager::install('AnnotationDbi')
@@ -38,6 +38,24 @@ for (u in 1:length(activation_function_set)) {
     if (!require(dplyr)) install.packages('dplyr')
     if (!require(ggplot2)) install.packages('ggplot2')
     if (!require(survival)) install.packages('survival')
+    
+    ## Making sure libraries are attached
+    library(BiocManager)
+    library(SummarizedExperiment)
+    library(compound.Cox)
+    library(tensorflow)
+    library(dplyr)
+    library(survival)
+    library(keras)
+    library(glmnet)
+    library(purrr)
+    library(survminer)
+    library(org.Hs.eg.db)
+    library(MultiAssayExperiment)
+    library(AnnotationDbi)
+    library(TCGAbiolinks)
+    library(tidyverse)
+    library(tibble)
     
     ### Initializing Values
     
