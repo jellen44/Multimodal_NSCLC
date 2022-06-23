@@ -14,6 +14,12 @@ if (!require(ggsci)) install.packages("ggsci")
 if (!require(tidyr)) install.packages("tidyr")
 if (!require(ggh4x)) install.packages("ggh4x")
 if (!require(pander)) install.packages("pander")
+library(pander)
+library(tidyr)
+library(tidytext)
+library(ggsci)
+library(ggh4x)
+library(RColorBrewer)
 ```
 
 # Functions for Analyzing the Data
