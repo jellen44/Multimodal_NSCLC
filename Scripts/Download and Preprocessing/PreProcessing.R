@@ -155,7 +155,7 @@ class(LUSC_RNA_process) <- "numeric"
 LUSC_RNA_filt <- LUSC_RNA_process[, which(as.numeric(colSums(LUSC_RNA_process == 0)) < limit)]
 
 #Connecting back to the barcodes
-LUSC_RNA_zeros <- as.data.frame(cbind(LUSC_RNA_zeros, barcodes_both))
+LUSC_RNA_zeros <- as.data.frame(cbind(LUSC_RNA_filt, barcodes_both))
 colnames(LUSC_RNA_zeros)[ncol(LUSC_RNA_zeros)] <- "barcode"
 
 #Taking only the multimodal patients
