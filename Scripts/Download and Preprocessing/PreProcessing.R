@@ -227,8 +227,8 @@ save(LUSC_lncRNA,file='~/desktop/Multimodal/LNCRNAS/LUSC_LNCS_process.RData')
   load(file="~/desktop/Multimodal/Methylation/LUAD_Methylation_Clin.RData")
   
   #LUSC and LUAD Row Names
-  rownames(LUSC_meth) <- LUSCclin_meth$barcode
-  rownames(LUAD_meth) <- LUADclin_meth$samples
+  rownames(LUSC_meth) <- LUSCclin_meth[,1]
+  rownames(LUAD_meth) <- LUADclin_meth[,1]
   
   #Matching up barcodes to only chosen cases
   load(file="~/desktop/Multimodal/Eligible_Barcodes/barcode_disease_mapping.Rdata")
