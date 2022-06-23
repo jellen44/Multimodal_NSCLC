@@ -6,6 +6,8 @@ if (!require('survival')) install.packages('survival')
 library(survminer)
 library(dplyr)
 library(ggplot2)
+library(survival)
+library(factoextra)
 
 # Taking Results From One Pipeline Run that Recorded PCA Data
 load(file="~/desktop/Multimodal/MultimodalPipeline_Results_Post/CV_sigmoid0.3Zeros_AllCombinations_EarlyandLateIntegration_denoising_zeros/clustering_data.Rdata")
