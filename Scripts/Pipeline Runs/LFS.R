@@ -18,6 +18,25 @@
     if (!require(dplyr)) install.packages('dplyr')
     if (!require(ggplot2)) install.packages('ggplot2')
     if (!require(survival)) install.packages('survival')
+
+    ## Making sure libraries are attached
+    library(BiocManager)
+    library(SummarizedExperiment)
+    library(compound.Cox)
+    library(tensorflow)
+    library(survminer)
+    library(dplyr)
+    library(survival)
+    library(keras)
+    library(glmnet)
+    library(purrr)
+    library(survminer)
+    library(org.Hs.eg.db)
+    library(MultiAssayExperiment)
+    library(AnnotationDbi)
+    library(TCGAbiolinks)
+    library(tidyverse)
+    library(tibble)
     
     ### Initializing Values
     
