@@ -19,6 +19,12 @@ if (!require(limma)) install.packages('limma')
 if (!require(EDASeq)) install.packages('EDASeq')
 if (!require(edgeR)) install.packages('edgeR')
 if (!require(ggsci)) install.packages('ggsci')
+library(ggrepel)
+library(DESeq2)
+library(limma)
+library(EDASeq)
+library(edgeR)
+library(ggsci)
 ```
 
 # Processing LNC Data
