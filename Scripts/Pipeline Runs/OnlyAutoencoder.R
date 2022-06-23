@@ -40,6 +40,25 @@ for (u in 1:length(activation_function_set)) {
     if (!require(ggplot2)) install.packages('ggplot2')
     if (!require(survival)) install.packages('survival')
     
+    ## Making sure libraries are attached
+    library(BiocManager)
+    library(SummarizedExperiment)
+    library(compound.Cox)
+    library(tensorflow)
+    library(survminer)
+    library(dplyr)
+    library(survival)
+    library(keras)
+    library(glmnet)
+    library(purrr)
+    library(survminer)
+    library(org.Hs.eg.db)
+    library(MultiAssayExperiment)
+    library(AnnotationDbi)
+    library(TCGAbiolinks)
+    library(tidyverse)
+    library(tibble)
+    
     ### Initializing Values
     
     # The number of features the linear feature selection technique will choose for each modality
