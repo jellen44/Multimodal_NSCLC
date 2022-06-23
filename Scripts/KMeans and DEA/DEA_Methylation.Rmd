@@ -23,6 +23,15 @@ if (!require(ggsci)) install.packages('ggsci')
 if (!require(lumi)) install.packages('lumi')
 if (!require(statmod)) install.packages('statmod')
 if (!require(IlluminaHumanMethylation450kanno.ilmn12.hg19)) install.packages('IlluminaHumanMethylation450kanno.ilmn12.hg19')
+library(ggrepel)
+library(DESeq2)
+library(limma)
+library(EDASeq)
+library(edgeR)
+library(ggsci)
+library(lumi)
+library(statmod)
+library(IlluminaHumanMethylation450kanno.ilmn12.hg19)
 ```
 
 # Processing Methylation Data and changing from beta to M values
