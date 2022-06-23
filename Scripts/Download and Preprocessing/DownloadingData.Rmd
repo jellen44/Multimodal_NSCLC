@@ -9,6 +9,7 @@ output: html_document
 
 ```{r}
 if (!require('BiocManager', quietly=T)) install.packages('BiocManager')
+library(BiocManager)
 if (!require('SummarizedExperiment')) BiocManager::install('SummarizedExperiment')
 if (!require('TCGAbiolinks')) BiocManager::install('TCGAbiolinks')
 if (!require('tidyverse')) install.packages('tidyverse')
@@ -21,6 +22,20 @@ if (!require('tibble')) install.packages('tibble')
 if (!require('stringr')) install.packages('stringr')
 if (!require('data.table')) install.packages('data.table')
 if (!require('readr')) install.packages('readr')
+
+# Making sure libraries are loaded
+library(SummarizedExperiment)
+library(TCGAbiolinks)
+library(tidyverse)
+library(dplyr)
+library(AnnotationDbi)
+library(GenomicFeatures)
+library(sesameData)
+library(sesame)
+library(tibble)
+library(stringr)
+library(data.table)
+library(readr)
 ```
 
 ### Downloading the Data - RNA Seq Data
