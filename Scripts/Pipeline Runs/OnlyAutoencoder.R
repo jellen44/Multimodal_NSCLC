@@ -41,6 +41,7 @@ for (u in 1:length(activation_function_set)) {
     if (!require(survival)) install.packages('survival')
     
     ## Making sure libraries are attached
+    library(ggplot2)
     library(BiocManager)
     library(SummarizedExperiment)
     library(compound.Cox)
