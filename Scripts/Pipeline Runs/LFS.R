@@ -25,6 +25,7 @@
     library(compound.Cox)
     library(tensorflow)
     library(survminer)
+    library(ggplot2)
     library(dplyr)
     library(survival)
     library(keras)
