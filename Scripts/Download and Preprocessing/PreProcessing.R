@@ -4,6 +4,7 @@ library(dplyr)
 library(tibble)
 library(stringr)
 if (!require('Rfast')) install.packages('Rfast')
+library(Rfast)
 
 ### Step 1: Preprocessing Clinical Data
 
