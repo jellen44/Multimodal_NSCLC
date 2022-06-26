@@ -28,69 +28,18 @@ library(edgeR)
 library(ggsci)
 ```
 
-# LUAD Data
-
-```{r}
-# Downloading Count Data
-query <- GDCquery(project = "TCGA-LUAD",data.category = "Transcriptome Profiling", data.type = "miRNA Expression Quantification", experimental.strategy = "miRNA-Seq")
-GDCdownload(query)
-LUAD_miRNA <- GDCprepare(query)
-LUAD_mirna <- as.matrix(assay(SummarizedExperiment(LUAD_miRNA)))
-
-# Preprocessing miRNA data and filtering out only miRNA that made it through preprocessing
-load(file="~/desktop/Multimodal/Eligible_Barcodes/barcode_disease_mapping.Rdata")
-LUAD_mirna <- as.data.frame(LUAD_mirna)
-LUAD_mirna <- column_to_rownames(LUAD_mirna, "miRNA_ID")
-LUAD_mirna <- as.data.frame(LUAD_mirna)
-LUAD_mirna <- LUAD_mirna %>% dplyr::select(contains('million'))
-colnames(LUAD_mirna) <- substr(colnames(LUAD_mirna), 12, 30)
-LUAD_mirna <- as.data.frame(LUAD_mirna)
-LUAD_miRNA_OnlyBarcodes <- LUAD_mirna %>% dplyr::select(matches(barcode_disease_mapping$barcode))
-```
-
-# LUSC Data
-
-```{r}
-# Downloading Count Data
-query <- GDCquery(project = "TCGA-LUSC", data.category = "Transcriptome Profiling",
-          data.type = "miRNA Expression Quantification", experimental.strategy = "miRNA-Seq")
-GDCdownload(query)
-LUSC_miRNA <- GDCprepare(query)
-LUSC_mirna <- as.matrix(assay(SummarizedExperiment(LUSC_miRNA)))
-
-# Preprocessing miRNA data and filtering out only miRNA thatmade it through preprocessing
-load(file="~/desktop/Multimodal/Eligible_Barcodes/barcode_disease_mapping.Rdata")
-LUSC_mirna <- as.data.frame(LUSC_mirna)
-LUSC_mirna <- column_to_rownames(LUSC_mirna , "miRNA_ID")
-LUSC_miRNA <- LUSC_mirna %>% dplyr::select(contains('per_million'))
-colnames(LUSC_miRNA) <- substr(colnames(LUSC_miRNA), 12, 30)
-LUSC_miRNA_OnlyBarcodes <- LUSC_miRNA %>% dplyr::select(matches(barcode_disease_mapping$barcode))
-```
-
-# Combing LUAD/LUSC and Saving Data
-
-```{r}
-LUSC_miRNA_OnlyBarcodes <- rownames_to_column(LUSC_miRNA_OnlyBarcodes)
-LUAD_miRNA_OnlyBarcodes <- rownames_to_column(LUAD_miRNA_OnlyBarcodes)
-LUAD_miRNA_OnlyBarcodes <- merge(LUAD_miRNA_OnlyBarcodes, LUSC_miRNA_OnlyBarcodes, by="rowname")
-LUAD_miRNA_OnlyBarcodes <- column_to_rownames(LUAD_miRNA_OnlyBarcodes)
-save(LUAD_miRNA_OnlyBarcodes, file = "~/desktop/Multimodal/LUAD_miRNA.Rdata")
-```
-
 #MIRNA ANALYSIS
 
 ```{r}
 # Loading Data
 load(file="~/desktop/Multimodal/DEA/DEA_Files/Barcodes/Bad_Barcodes.Rdata")
-load(file = "~/desktop/Multimodal/DEA/DEA_Files/DEA_miRNA.Rdata")
 load(file="~/desktop/Multimodal/miRNA/miRNA_processed.RData") #miRNA from Preprocessing
 
-# Preprocessing miRNA Data
+# Taking only genes
+LUSC_miRNA <- column_to_rownames(LUSC_miRNA, "barcode")
 LUSC_miRNA <- LUSC_miRNA %>% dplyr::select(starts_with("h"))
-miRNAMatrix <- as.data.frame(t(LUAD_miRNA_OnlyBarcodes)) %>% dplyr::select(all_of(colnames(LUSC_miRNA)))
-miRNAMatrix <- as.matrix(t(miRNAMatrix))
-class(miRNAMatrix) <- "numeric"
-dataFilt <- miRNAMatrix
+LUSC_miRNA <- as.matrix(t(LUSC_miRNA))
+class(LUSC_miRNA) <- "numeric"
 
 # Function that will help split data into bad and good prognosis barcodes
 outersect <- function(x, y) {
@@ -100,9 +49,9 @@ outersect <- function(x, y) {
 
 # Splitting Data into Bad and Good Prognosis
 BadPrognosis_Cluster <- Bad_Barcodes
-GoodPrognosis_Cluster <- outersect(BadPrognosis_Cluster, colnames(dataFilt))
-BadPrognosis <- subset(dataFilt, TRUE, c(BadPrognosis_Cluster))
-GoodPrognosis <- subset(dataFilt, TRUE, c(GoodPrognosis_Cluster))
+GoodPrognosis_Cluster <- outersect(BadPrognosis_Cluster, colnames(LUSC_miRNA))
+BadPrognosis <- subset(LUSC_miRNA, TRUE, c(BadPrognosis_Cluster))
+GoodPrognosis <- subset(LUSC_miRNA, TRUE, c(GoodPrognosis_Cluster))
 
 # Putting Data Together and Adding Labels for Group
 Final_Matrix <- cbind(GoodPrognosis, BadPrognosis)
@@ -119,7 +68,7 @@ col$Condition <- relevel(col$Condition, "GoodPrognosis")
 
 ```{r}
 # differential expression analysis
-dds <- DESeqDataSetFromMatrix(countData = Final_Matrix, colData = col,
+dds <- DESeqDataSetFromMatrix(countData = round(Final_Matrix), colData = col,
 design = ~ Condition) # look at differentially expressed based on good or bad prognosis
 dds <- DESeq(dds)
 res <- results(dds, pAdjustMethod = "fdr") #adjusting based on false discovery rate
@@ -135,14 +84,14 @@ res <- read.csv(file="~/desktop/Multimodal/DEA/DEA_Results/miRNA_results.csv") #
 
 # Adding new columns to see which genes are significantly differentially expressed
 res$diffexpressed <- "NO" # Default
-# if log2Foldchange > 0.58 and pvalue < 0.05, set as "UP" 
+# if log2Foldchange > 0.58 and pvalue < 0.05, set as "UP"
 res$diffexpressed[res$log2FoldChange > 0.58 & res$padj < 0.05] <- "UP"
 # if log2Foldchange < -0.58 and pvalue < 0.05, set as "DOWN"
 res$diffexpressed[res$log2FoldChange < -0.58 & res$padj < 0.05] <- "DOWN"
 
 # Adding a new variable that labels only those genes that are DE (for plotting below)
 res$delabel <- NA
-res$delabel[res$diffexpressed != "NO"] <- res$miRNA[res$diffexpressed != "NO"]
+res$delabel[res$diffexpressed != "NO"] <- res$X[res$diffexpressed != "NO"]
 
 # plot adding up all layers we have seen so far
 ggplot(data=res, aes(x=log2FoldChange, y=-log10(padj), col=diffexpressed, label=delabel)) +
