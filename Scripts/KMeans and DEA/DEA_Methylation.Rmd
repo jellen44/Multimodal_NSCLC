@@ -39,10 +39,14 @@ library(IlluminaHumanMethylation450kanno.ilmn12.hg19)
 ```{r}
 # Loading Data
 load(file="~/desktop/Multimodal/DEA/DEA_Files/Barcodes/Bad_Barcodes.Rdata")
-load(file="~/desktop/Multimodal/DEA/DEA_Files/Methylation_Processed_Imputed.Rdata") # This file is preprocessed methylation data, but taken right after the missing data imputation step in the 'All_Modality_Comparison.R' script
+load(file="~/desktop/Multimodal/Methylation/LUSC_meth_processed.Rdata") # Methylation Data
+
+# Preprocessing Methylation Data
+LUSC_meth <- column_to_rownames(LUSC_meth, "barcode")
+LUSC_meth <- LUSC_meth %>% dplyr::select(starts_with("c")) %>% dplyr::select(-c(censor_time1))
 
 # Setting up Methylation Data
-LUAD_meth <- as.data.frame(t(LUSC_meth_imputed))
+LUAD_meth <- as.data.frame(t(LUSC_meth))
 rows <- rownames(LUAD_meth)
 LUAD_meth <- as.data.frame(sapply(LUAD_meth, as.numeric))
 rownames(LUAD_meth) <- rows
@@ -74,7 +78,6 @@ Mvalues <- Mvalues[!is.infinite(rowSums(Mvalues)),]
 
 #Getting Annotations to Map Probes to Gene Level
 ann450k <- getAnnotation(IlluminaHumanMethylation450kanno.ilmn12.hg19)
-head(ann450k)
 rowname <- rownames(ann450k)
 ann450 <- cbind(rowname, ann450k$UCSC_RefGene_Name)
 Mvalues <- rownames_to_column(Mvalues)
@@ -108,16 +111,6 @@ FValue <- rep(0,ncol(diff_analysis)-1)
 PValue <- rep(0,ncol(diff_analysis)-1)
 Anova_DF <- as.data.frame(cbind(DF, SumSq, MeanSq, FValue, PValue))
 data_new <- diff_analysis
-
-# Loop that makes sure no infinite values were created
-infinite_values <- NULL
-for (i in 1:(ncol(data_new)-1)) {
-    if (any(is.infinite(data_new[,i]))) {
-         infinite_values[i]  <- i 
-         } else infinite_values[i]  <- NA
-}
-infinite_indices <- na.omit(infinite_values)
-data_new <- data_new[,-infinite_indices]
 
 # Using a Loop to Carry out an ANOVA For Each Gene
 for (i in 1:(ncol(data_new)-1)){
