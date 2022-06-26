@@ -38,7 +38,7 @@ LUAD_miRNA <- GDCprepare(query)
 LUAD_mirna <- as.matrix(assay(SummarizedExperiment(LUAD_miRNA)))
 
 # Preprocessing miRNA data and filtering out only miRNA that made it through preprocessing
-load(file="~/desktop/Multimodal/barcode_disease_mapping.Rdata")
+load(file="~/desktop/Multimodal/Eligible_Barcodes/barcode_disease_mapping.Rdata")
 LUAD_mirna <- as.data.frame(LUAD_mirna)
 LUAD_mirna <- column_to_rownames(LUAD_mirna, "miRNA_ID")
 LUAD_mirna <- as.data.frame(LUAD_mirna)
