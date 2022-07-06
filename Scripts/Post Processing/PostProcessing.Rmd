@@ -83,7 +83,7 @@ overall_df <- read.csv(paste0("~/desktop/Multimodal/MultimodalPipeline_Results_P
 processed_df <- processing_overall_results(overall_df)
 
 # Choosing the Modalities to Examine and Rounding the Data
-processed_df <- processed_df %>% filter(Data_Types=="Multimodal (Late)" | Data_Types=="Clinical" | Data_Types=="miRNA"| Data_Types=="mRNA" | Data_Types=="Methylation"| Data_Types=="LNC RNAs")
+processed_df <- processed_df %>% filter(Data_Types=="Multimodal (Early)" | Data_Types=="Clinical" | Data_Types=="miRNA"| Data_Types=="mRNA" | Data_Types=="Methylation"| Data_Types=="LNC RNAs")
 processed_df$Data_Types <- as.factor(processed_df$Data_Types)
 levels(processed_df$Data_Types)[length(levels(processed_df$Data_Types))] <- "Multimodal"
 
