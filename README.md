@@ -2,7 +2,7 @@
 
 This study presents a novel, autoencoder-based pipeline for both adenocarcinoma (LUAD) and squamous cell carcinoma (LUSC) patients that aims to predict survival more effectively and identify NSCLC survival subtypes. We implemented a combined linear feature selection and denoising autoencoder approach for the compression of multiple modalities of data, including microRNA (miRNA), mRNA, DNA methylation, long non-coding RNAs (lncRNAs) and clinical data. Survival performance, as measured by the concordance index (C-index), was compared across data dimensionality reduction techniques, modality combinations, time of data integration and training data types. A regularized Cox proportional hazards model, Elastic Net, was chosen to make survival predictions using a 5-fold cross validation scheme on 732 NSCLC (408 LUAD; 324 LUSC) patients from the Cancer Genome Atlas (TCGA) dataset.
 
-# Instructions
+# Implementation Instructions
 
 1. Download the zipped 'Multimodal' folder here: [Multimodal.zip](https://github.com/jellen44/Multimodal_NSCLC/files/8828858/Multimodal.zip)
 2. Unzip the Multimodal folder and add it to your desktop.
